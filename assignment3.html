@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+    form, .search-box {
+      margin-bottom: 15px;
+    }
+    input {
+      padding: 6px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      padding: 6px 0;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h2>Contact Manager</h2>
+
+  <!-- Search Box -->
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Search contacts...">
+  </div>
+
+  <!-- Contact Form -->
+  <form id="contactForm">
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="text" id="phone" placeholder="Phone Number">
+    <button type="submit">Add Contact</button>
+  </form>
+
+  <!-- Contact List -->
+  <ul id="contactList"></ul>
+
+  <script>
+    const form = document.getElementById("contactForm");
+    const nameInput = document.getElementById("name");
+    const phoneInput = document.getElementById("phone");
+    const contactList = document.getElementById("contactList");
+    const searchBox = document.getElementById("search");
+
+    // Load contacts from localStorage
+    let contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+
+    // Render contacts to the list
+    function renderContacts(filter = "") {
+      contactList.innerHTML = "";
+      contacts
+        .filter(c => c.name.toLowerCase().includes(filter.toLowerCase()) || 
+                     c.phone.includes(filter))
+        .forEach(c => {
+          const li = document.createElement("li");
+          li.textContent = `${c.name} – ${c.phone}`;
+          contactList.appendChild(li);
+        });
+    }
+
+    // Add contact
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = nameInput.value.trim();
+      const phone = phoneInput.value.trim();
+
+      // Validation
+      if (!name || !phone) {
+        alert("Both fields are required!");
+        return;
+      }
+      if (!/^\d+$/.test(phone)) {
+        alert("Phone number must contain digits only!");
+        return;
+      }
+
+      // Save contact
+      contacts.push({ name, phone });
+      localStorage.setItem("contacts", JSON.stringify(contacts));
+
+      // Clear inputs and refresh list
+      nameInput.value = "";
+      phoneInput.value = "";
+      renderContacts();
+    });
+
+    // Search contacts
+    searchBox.addEventListener("input", function () {
+      renderContacts(this.value);
+    });
+
+    // Initial render
+    renderContacts();
+  </script>
+</body>
+</html>
