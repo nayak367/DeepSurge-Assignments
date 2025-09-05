@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centered Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f4f4f9;
+    }
+    form {
+      width: 350px;
+      padding: 20px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #aaa;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="registrationForm">
+    <h2>Registration Form</h2>
+
+    <label for="fullname">Full Name</label>
+    <input type="text" id="fullname" name="fullname">
+
+    <label for="email">Email Address</label>
+    <input type="text" id="email" name="email">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password">
+
+    <button type="submit">Register</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // stop default form submission
+
+      const fullname = document.getElementById('fullname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      // Validation: Empty fields
+      if (!fullname || !email || !password) {
+        alert("All fields are required!");
+        return;
+      }
+
+      // Validation: Email format
+      if (!email.includes('@') || !email.includes('.')) {
+        alert("Please enter a valid email address!");
+        return;
+      }
+
+      // Validation: Password length
+      if (password.length < 8) {
+        alert("Password must be at least 8 characters long!");
+        return;
+      }
+
+      // If all validations pass
+      console.log("✅ Registration Successful!");
+      console.log("Full Name:", fullname);
+      console.log("Email:", email);
+      console.log("Password:", password);
+
+      alert("Registration Successful!");
+
+      // Reset the form
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
