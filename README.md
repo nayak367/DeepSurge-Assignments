@@ -12,4 +12,7 @@ ANS: Pedding-Space inside the element, between the content and the border.
      Border-The line that surrounds the content + padding.
             Can be given width, style, and color.
      Margin-Space outside the element, between the border and the next element.
+4/ What is pseudo code
+ANS: Define the state of an element.
+     Start with a colon :
 
