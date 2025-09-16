@@ -1,6 +1,7 @@
 # DeepSurge-Assignments
 1/ line 79 : event.preventDefault();
 ANS:*Stop page reload,Show messages dynamically,Enable custom validation.
+
 2/ What is inline,internal,external css
 ANS: Inline-CSS written directly inside an HTML element’s style attribute.
      Internal-CSS written inside the <style> tag in the <head> section of the HTML file.
